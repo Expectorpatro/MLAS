@@ -6,7 +6,6 @@ from sklearn.svm import SVC
 import xgboost as xgb
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier, BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
-import lightgbm as lgb
 import logging
 
 # 定义机器学习算法
@@ -14,7 +13,6 @@ ALGORITHMS = {
     'SVM': SVC(kernel='rbf', C=1, gamma='auto', random_state=42),
     'XGB': xgb.XGBClassifier(max_depth=6, eta=0.3, min_child_weight=1, objective='binary:logistic'),
     'RF': RandomForestClassifier(n_estimators=100, random_state=200, max_features='sqrt'),
-    'LGBM': lgb.LGBMClassifier(objective='binary', num_leaves=31, learning_rate=0.1, n_estimators=100, random_state=42, verbose=-1),
     'GBDT': GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=6, random_state=42),
     'ADB': AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=6, random_state=42), n_estimators=100, random_state=42),
     'BAG': BaggingClassifier(base_estimator=SVC(), n_estimators=100, random_state=0)
@@ -46,7 +44,6 @@ def process_files(positive_file, negative_file):
     # 对特征使用不同的模型与评价标准
     results = {}
     for algo_name, model in ALGORITHMS.items():
-        print(algo_name)
         results[algo_name] = {}
         score = cross_val_score(model, X, y, cv=5, scoring='roc_auc').mean()
         results[algo_name] = score
