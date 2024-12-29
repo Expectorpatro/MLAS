@@ -17,4 +17,6 @@ The hyper-param.py file is the Python code for hyperparameter tuning.
 
 The evaluate.py file is the Python code for evaluating the model. 
 
+The Supplementary Files.zip file concludes results for MEME analysis and all of the articles referenced during the data collection process.
+
 If you have any questions, please contact Xingcheng Ni at email: 10322128@stu.njau.edu.cn
